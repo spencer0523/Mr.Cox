@@ -235,7 +235,7 @@
 	var rect = c.getContext("2d");
 	//sets up the for loop
 	var i = 0
-	var howManyTimes = 2500;
+	var howManyTimes = 835;
 
 	
 	//functions so you don't have to repeatdly type the same things over and over again
@@ -279,38 +279,11 @@
 			ctx.fillRect(i + where,0,25,50);
 			ctx.clearRect(i + (where-1),0,0.5,50);
 			topPart()
-			if(array[0] == 1 && i == 0){
-				oneLaser();
-			}
 		} else if(array[number] != 1){
 			ctx.fillStyle="#cfcfd1";
 			ctx.fillRect(i + where,0,25,50);
 			ctx.clearRect(i + (where-1),0,0.5,50);
 			topPart()
-			if(array[0] == 0 && i == 0){
-				zeroLaser();
-			}
-			if(array[1] == 0 && i == 0){
-				zeroLaser();
-			}
-			if(array[2] == 0 && i == 0){
-				zeroLaser();
-			}
-			if(array[3] == 0 && i == 0){
-				zeroLaser();
-			}
-			if(array[4] == 0 && i == 0){
-				zeroLaser();
-			}
-			if(array[5] == 0 && i == 0){
-				zeroLaser();
-			}
-			if(array[6] == 0 && i == 0){
-				zeroLaser();
-			}
-			if(array[7] == 0 && i == 0){
-				zeroLaser();
-			}
 			//laser()
 		}
 	}
@@ -322,27 +295,129 @@
 			//so you don't have to repeatly type draw rectangles and where and check if 1 or 0
 			if(i == 150){
 				clearLaser()
-				console.log("This one is fine")
+				console.log("This one is fine");
 			}
-			if(i == 160){
-				laser();
+			if(firstAscii[0] == 0 && (i < 150 && i > 0)){
+				zeroLaser();
+			} else if (firstAscii[0] == 1 && (i < 150 && i > 0)){
+				oneLaser();
 			}
-			if(i == 185){
+			if(i == 180){
 				clearLaser()
+				console.log("this one is fine");
 			}
-			if(i == 190){
-				laser();
+			if(firstAscii[1] == 0 && (i < 180 && i > 150)){
+				zeroLaser();
+				zeroAndOneIfStatement(firstAscii, 1, -30);
+			} else if (firstAscii[1] == 1 && (i < 180 && i > 150)){
+				oneLaser();
 			}
-			if(i == 220){
+			if(firstAscii[2] == 0 && (i < 210 && i > 180)){
+				zeroLaser();
+				zeroAndOneIfStatement(firstAscii, 2, -60);
+			} else if (firstAscii[2] == 1 && (i < 210 && i > 180)){
+				oneLaser();
+			}
+			if(i == 210){
 				clearLaser();
 			}
-			if(i == 230){
-				laser();
+			if(firstAscii[3] == 0 && (i < 240 && i > 210)){
+				zeroAndOneIfStatement(firstAscii, 3, -90);
+				zeroLaser();
+			
+			} else if (firstAscii[3] == 1 && (i < 240 && i > 210)){
+				oneLaser();
 			}
-			if(i == 250){
+			if(i == 240){
 				clearLaser();
 			}
-
+			if(firstAscii[4] == 0 && (i < 270 && i > 240)){
+				zeroLaser();
+				zeroAndOneIfStatement(firstAscii, 4, -120);
+			} else if (firstAscii[4] == 1 && (i < 270 && i > 240)){
+				oneLaser();
+			}
+			if(i == 270){
+				clearLaser();
+			}
+			if(firstAscii[5] == 0 && (i < 300 && i > 270)){
+				zeroLaser();
+				zeroAndOneIfStatement(firstAscii, 5, -150);
+			} else if (firstAscii[5] == 1 && (i < 300 && i > 270)){
+				oneLaser();
+			}
+			if(i == 300){
+				clearLaser();
+			}
+			if(firstAscii[6] == 0 && (i < 330 && i > 300)){
+				zeroAndOneIfStatement(firstAscii, 6, -180);
+				zeroLaser();
+				
+			} else if (firstAscii[6] == 1 && (i < 330 && i > 300)){
+				oneLaser();
+			}
+			
+			if(i == 330){
+				clearLaser();
+			}
+			if(firstAscii[7] == 0 && (i < 360 && i > 330)){
+				zeroAndOneIfStatement(firstAscii, 6, -180);
+				zeroLaser();
+				
+			} else if (firstAscii[7] == 1 && (i < 360 && i > 330)){
+				oneLaser();
+			}
+			if(i == 360){
+				clearLaser();
+			}
+			if(i == 390){
+				clearLaser();
+			}
+			if(i == 420){
+				clearLaser();
+			}
+			if(i == 450){
+				clearLaser();
+			}
+			if(i == 480){
+				clearLaser();
+			}
+			if(i == 510){
+				clearLaser();
+			}
+			if(i == 540){
+				clearLaser();
+			}
+			if(i == 570){
+				clearLaser();
+			}
+			if(i == 600){
+				clearLaser();
+			}
+			if(i == 630){
+				clearLaser();
+			}
+			if(i == 660){
+				clearLaser();
+			}
+			if(i == 690){
+				clearLaser();
+			}
+			if(i == 720){
+				clearLaser();
+			}
+			if(i == 750){
+				clearLaser();
+			}
+			if(i == 780){
+				clearLaser();
+			}
+		
+			if(i == 810){
+				clearLaser();
+			}
+			
+			
 			zeroAndOneIfStatement(firstAscii, 0, 0);
 			zeroAndOneIfStatement(firstAscii, 1, -30);
 			zeroAndOneIfStatement(firstAscii, 2, -60);
