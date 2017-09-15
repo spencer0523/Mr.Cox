@@ -1,0 +1,386 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>cdNew</title>
+</head>
+
+<body>
+<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;"> Your browser does not support the HTML5 canvas tag.</canvas>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<button id="pauseButton">pause</button>
+
+  1st<br>
+  <input type="text" name="first" id="first">
+  <br>
+  2nd<br>
+  <input type="text" name="second" id="second">
+  <br>
+  3rd<br>
+  <input type="text" name="third" id="third">
+
+  <button id="getLetters">letters</button>
+
+<script>
+	//creates rectangles with either red,black, or grey 
+	/*
+		Each of these rectangles represent either a 1 or a 0
+		a laser should pass through. The laser should go "through" if its
+		a zero. This should be shown by the laser being drawn over the rectangle
+		then when its a 1 the 0 rectantangle should be drawn over the laser so
+		it looks like it is being read.
+		*/
+	var first = 0;
+	var firstAscii = 0;
+	var lettersClickedButton = $("#getLetters");
+	
+	lettersClickedButton.click(function() {
+		console.log("clicked")
+		first = $("#first").val();
+		firstAscii = getAsciiLetters(first);
+		console.log(firstAscii);
+		second = $("#second").val();
+		secondAscii = getAsciiLetters(second);
+		third = $("#third").val();
+		thirdAscii = getAsciiLetters(third);
+		console.log(secondAscii);
+		console.log(thirdAscii);
+		run();
+	})
+	
+	function getAsciiLetters(letter){
+		if (letter == "A"){
+			return[0,1,0,0,0,0,0,1]
+		}
+		if (letter == "B"){
+			return[0,1,0,0,0,0,1,0]
+		}
+		if (letter == "C"){
+			return[0,1,0,0,0,0,1,1]
+		}
+		if (letter == "D"){
+			return[0,1,0,0,0,1,0,0]
+		}
+		if (letter == "E"){
+			return[0,1,0,0,0,1,0,1]
+		}
+		if (letter == "F"){
+			return[0,1,0,0,0,1,1,0]
+		}
+		if (letter == "G"){
+			return[0,1,0,0,0,1,1,1]
+		}
+		if (letter == "H"){
+			return[0,1,0,0,1,0,0,0]
+		}
+		if (letter == "I"){
+			return[0,1,0,0,1,0,0,1]
+		}
+		if (letter == "J"){
+			return[0,1,0,0,1,0,1,0]
+		}
+		if (letter == "K"){
+			return[0,1,0,0,1,0,1,1]
+		}
+		if (letter == "L"){
+			return[0,1,0,0,1,1,0,0]
+		}
+		if (letter == "M"){
+			return[0,1,0,0,1,1,0,1]
+		}
+		if (letter == "N"){
+			return[0,1,0,0,1,1,1,0]
+		}
+		if (letter == "O"){
+			return[0,1,0,0,1,1,1,1]
+		}
+		if (letter == "P"){
+			return[0,1,0,1,0,0,0,0]
+		}
+		if (letter == "Q"){
+			return[0,1,0,1,0,0,0,1]
+		}
+		if (letter == "R"){
+			return[0,1,0,1,0,0,1,0]
+		}
+		if (letter == "S"){
+			return[0,1,0,1,0,0,1,1]
+		}
+		if (letter == "T"){
+			return[0,1,0,1,0,1,0,0]
+		}
+		if (letter == "U"){
+			return[0,1,0,1,0,1,0,1]
+		}
+		if (letter == "V"){
+			return[0,1,0,1,0,1,1,0]
+		}
+		if (letter == "W"){
+			return[0,1,0,1,0,1,1,1]
+		}
+		if (letter == "X"){
+			return[0,1,0,1,1,0,0,0]
+		}
+		if (letter == "Y"){
+			return[0,1,0,1,1,0,0,1]
+		}
+		if (letter == "Z"){
+			return[0,1,0,1,1,0,1,0]
+		}
+		if (letter == "a"){
+			return [0,1,1,0,0,0,0,1]
+		}
+		if (letter == "b"){
+			return [0,1,1,0,0,0,1,0]
+		}
+		if (letter == "c"){
+			return [0,1,1,0,0,0,1,1]
+		}
+		if (letter == "d"){
+			return [0,1,1,0,0,1,0,0]
+		}
+		if (letter == "e"){
+			return [0,1,1,0,0,1,0,1]
+		}
+		if (letter == "f"){
+			return [0,1,1,0,0,1,1,0]
+		}
+		if (letter == "g"){
+			return [0,1,1,0,0,1,1,1]
+		}
+		if (letter == "h"){
+			return [0,1,1,0,1,0,0,0]
+		}
+		if (letter == "i"){
+			return [0,1,1,0,1,0,0,1]
+		}
+		if (letter == "j"){
+			return [0,1,1,0,1,0,1,0]
+		}
+		if (letter == "k"){
+			return [0,1,1,0,1,0,1,1]
+		}
+		if (letter == "l"){
+			return[0,1,1,0,1,1,0,0]
+		}
+		if (letter == "m"){
+			return[0,1,1,0,1,1,0,1]
+		}
+		if (letter == "n"){
+			return[0,1,1,0,1,1,1,0]
+		}
+		if (letter == "o"){
+			return[0,1,1,0,1,1,1,1]
+		}
+		if (letter == "p"){
+			return[0,1,1,1,0,0,0,0]
+		}
+		if (letter == "q"){
+			return[0,1,1,1,0,0,0,1]
+		}
+		if (letter == "r"){
+			return[0,1,1,1,0,0,1,0]
+		}
+		if (letter == "s"){
+			return[0,1,1,1,0,0,1,1]
+		}
+		if (letter == "t"){
+			return[0,1,1,1,0,1,0,0]
+		}
+		if (letter == "u"){
+			return[0,1,1,1,0,1,0,1]
+		}
+		if (letter == "v"){
+			return[0,1,1,1,0,1,1,0]
+		}
+		if (letter == "w"){
+			return[0,1,1,1,0,1,1,1]
+		}
+		if (letter == "x"){
+			return[0,1,1,1,1,0,0,0]
+		}
+		if (letter == "y"){
+			return[0,1,1,1,1,0,0,1]
+		}
+		if (letter == "z"){
+			return[0,1,1,1,1,0,1,0]
+		}
+		
+		
+	}
+	//cycle wait cycle
+	
+	
+	
+	var pauseButtonClicked = 0;
+	var pauseButtonClickedOnce = 0;
+	$('#pauseButton').click(function() {
+		if (pauseButtonClickedOnce == 0){
+                    pauseButtonClicked = 1; 
+					pauseButtonClickedOnce = 1;
+					console.log(pauseButtonClicked)
+		}
+		else{
+			pauseButtonClicked = 0;
+			pauseButtonClickedOnce = 0
+			console.log(pauseButtonClicked)
+			run()
+		}
+	});
+	var c = document.getElementById("myCanvas");
+	var ctx = c.getContext("2d");
+	var rect = c.getContext("2d");
+	var i = 0
+	var howManyTimes = 2500;
+
+	
+	function laser() {
+		rect.fillStyle="#ff0000";
+		rect.fillRect(150,0,-5,150);
+		rect.stroke();
+		rect.closePath;
+	}
+	function zeroLaser(){
+		rect.fillStyle="#ff0000";
+		rect.fillRect(150,20,-5,200);
+		rect.stroke();
+	}
+	//what the one laser should look like
+	function oneLaser(){
+		rect.fillStyle="#ff0000";
+		rect.fillRect(150,50,-5,230);
+		rect.stroke();
+	}
+	//clears the entire laser(and also everything behind it)
+	function clearLaser() {
+		rect.clearRect(150,0,-5,150);
+	}
+	//clears the rectangle so it moves forward
+	function clearRectagle(){
+		rect.clearRect(0,0,i+40,150);
+	}
+	function createGreyLine(addToI){
+		ctx.strokeStyle
+		ctx.moveTo(i + addToI);
+		ctx.lineTo(i + addToI);
+		ctx.strokeStyle("#A9A9A9");
+		ctx.stroke()
+		
+	}
+	function topPart(){
+		ctx.fillStyle="#a9a9a9";
+		ctx.fillRect(0,0,500,20);
+	}
+
+	function zeroAndOneIfStatement(array, number, where){
+		//console.log(array, number, where);
+		if(array[number] == 1){
+			ctx.fillStyle="#210123";
+			ctx.fillRect(i + where,0,25,50);
+			ctx.clearRect(i + (where-1),0,0.5,50);
+			topPart()
+			if(array[0] == 1 && i == 0){
+				oneLaser();
+			}
+		} else if(array[number] != 1){
+			ctx.fillStyle="#cfcfd1";
+			ctx.fillRect(i + where,0,25,50);
+			ctx.clearRect(i + (where-1),0,0.5,50);
+			topPart()
+			if(array[0] == 0 && i == 0){
+				zeroLaser();
+			}
+			if(array[1] == 0 && i == 0){
+				zeroLaser();
+			}
+			if(array[2] == 0 && i == 0){
+				zeroLaser();
+			}
+			if(array[3] == 0 && i == 0){
+				zeroLaser();
+			}
+			if(array[4] == 0 && i == 0){
+				zeroLaser();
+			}
+			if(array[5] == 0 && i == 0){
+				zeroLaser();
+			}
+			if(array[6] == 0 && i == 0){
+				zeroLaser();
+			}
+			if(array[7] == 0 && i == 0){
+				zeroLaser();
+			}
+			//laser()
+		}
+	}
+	function run(){
+		
+		function forLoop(){
+			topPart()
+			//used to shorten the code by alot
+			//so you don't have to repeatly type draw rectangles and where and check if 1 or 0
+			if(i == 150){
+				clearLaser()
+				console.log("This one is fine")
+			}
+			if(i == 160){
+				laser();
+			}
+			if(i == 185){
+				clearLaser()
+			}
+			if(i == 190){
+				laser();
+			}
+			if(i == 220){
+				clearLaser();
+			}
+			if(i == 230){
+				laser();
+			}
+			if(i == 250){
+				clearLaser();
+			}
+
+			zeroAndOneIfStatement(firstAscii, 0, 0);
+			zeroAndOneIfStatement(firstAscii, 1, -30);
+			zeroAndOneIfStatement(firstAscii, 2, -60);
+			zeroAndOneIfStatement(firstAscii, 3, -90);
+			zeroAndOneIfStatement(firstAscii, 4, -120);
+			zeroAndOneIfStatement(firstAscii, 5, -150);
+			zeroAndOneIfStatement(firstAscii, 6, -180);
+			zeroAndOneIfStatement(firstAscii, 7, -210);
+			zeroAndOneIfStatement(secondAscii, 0, -240);
+			zeroAndOneIfStatement(secondAscii, 1, -270);
+			zeroAndOneIfStatement(secondAscii, 2, -300);
+			zeroAndOneIfStatement(secondAscii, 3, -330);
+			zeroAndOneIfStatement(secondAscii, 4, -360);
+			zeroAndOneIfStatement(secondAscii, 5, -390);
+			zeroAndOneIfStatement(secondAscii, 6, -420);
+			zeroAndOneIfStatement(secondAscii, 7, -450);
+			zeroAndOneIfStatement(thirdAscii, 0, -480);
+			zeroAndOneIfStatement(thirdAscii, 1, -510);
+			zeroAndOneIfStatement(thirdAscii, 2, -540);
+			zeroAndOneIfStatement(thirdAscii, 3, -570);
+			zeroAndOneIfStatement(thirdAscii, 4, -600);
+			zeroAndOneIfStatement(thirdAscii, 5, -630);
+			zeroAndOneIfStatement(thirdAscii, 6, -660);
+			zeroAndOneIfStatement(thirdAscii, 7, -690);
+			
+			
+			i++
+			
+			if(pauseButtonClickedOnce != 1){
+				if(i < howManyTimes){
+					setTimeout(forLoop, 25);
+					console.log("ranOnce");
+				}
+			}
+			
+		}
+		forLoop();
+	}
+</script>
+</body>
+</html>
