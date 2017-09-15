@@ -34,6 +34,7 @@
 	var firstAscii = 0;
 	var lettersClickedButton = $("#getLetters");
 	
+	//used to run the function affter letters are inputted
 	lettersClickedButton.click(function() {
 		console.log("clicked")
 		first = $("#first").val();
@@ -48,6 +49,7 @@
 		run();
 	})
 	
+	//gets the letter and returns in as an ascii in array form to make it easier to deal with
 	function getAsciiLetters(letter){
 		if (letter == "A"){
 			return[0,1,0,0,0,0,0,1]
@@ -211,7 +213,7 @@
 	//cycle wait cycle
 	
 	
-	
+	//handles the pause and play button.
 	var pauseButtonClicked = 0;
 	var pauseButtonClickedOnce = 0;
 	$('#pauseButton').click(function() {
@@ -227,19 +229,23 @@
 			run()
 		}
 	});
+	//sets up the canvas
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
 	var rect = c.getContext("2d");
+	//sets up the for loop
 	var i = 0
 	var howManyTimes = 2500;
 
 	
+	//functions so you don't have to repeatdly type the same things over and over again
 	function laser() {
 		rect.fillStyle="#ff0000";
 		rect.fillRect(150,0,-5,150);
 		rect.stroke();
 		rect.closePath;
 	}
+	
 	function zeroLaser(){
 		rect.fillStyle="#ff0000";
 		rect.fillRect(150,20,-5,200);
@@ -259,14 +265,8 @@
 	function clearRectagle(){
 		rect.clearRect(0,0,i+40,150);
 	}
-	function createGreyLine(addToI){
-		ctx.strokeStyle
-		ctx.moveTo(i + addToI);
-		ctx.lineTo(i + addToI);
-		ctx.strokeStyle("#A9A9A9");
-		ctx.stroke()
-		
-	}
+	
+	//the grey area at the top of the screen
 	function topPart(){
 		ctx.fillStyle="#a9a9a9";
 		ctx.fillRect(0,0,500,20);
@@ -368,13 +368,13 @@
 			zeroAndOneIfStatement(thirdAscii, 6, -660);
 			zeroAndOneIfStatement(thirdAscii, 7, -690);
 			
-			
+			//increments the loop
 			i++
 			
 			if(pauseButtonClickedOnce != 1){
 				if(i < howManyTimes){
+					//uses a timeout function that way you can see everything moving 
 					setTimeout(forLoop, 25);
-					console.log("ranOnce");
 				}
 			}
 			
