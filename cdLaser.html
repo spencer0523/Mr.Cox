@@ -213,13 +213,13 @@
 	//cycle wait cycle
 	
 	
-	//handles the pause and play button.
+	//handles the pause and play button.sa
 	var pauseButtonClicked = 0;
 	var pauseButtonClickedOnce = 0;
 	$('#pauseButton').click(function() {
 		if (pauseButtonClickedOnce == 0){
                     pauseButtonClicked = 1; 
-					pauseButtonClickedOnce = 1;
+					pauseButtonC;oafflickedOnce = 1;
 					console.log(pauseButtonClicked)
 		}
 		else{
@@ -241,7 +241,7 @@
 	//functions so you don't have to repeatdly type the same things over and over again
 	function laser() {
 		rect.fillStyle="#ff0000";
-		rect.fillRect(150,0,-5,150);
+		rect.fillRect(151,0,-5,149);
 		rect.stroke();
 		rect.closePath;
 	}
@@ -279,13 +279,18 @@
 			ctx.fillRect(i + where,0,25,50);
 			ctx.clearRect(i + (where-1),0,0.5,50);
 			topPart()
+			oneLaser()
 		} else if(array[number] != 1){
-			ctx.fillStyle="#cfcfd1";
-			ctx.fillRect(i + where,0,25,50);
+			ctx.strokeStyle="#cfcfd1";
+			ctx.strokeRect(i + where,0,25,50);
 			ctx.clearRect(i + (where-1),0,0.5,50);
 			topPart()
+			zeroLaser()
 			//laser()
 		}
+/*		if(array == secondAscii){
+			number 
+		}*/
 	}
 	function run(){
 		
@@ -416,12 +421,11 @@
 			if(i == 810){
 				clearLaser();
 			}
-			
-			
+			var width = -30
 			zeroAndOneIfStatement(firstAscii, 0, 0);
-			zeroAndOneIfStatement(firstAscii, 1, -30);
-			zeroAndOneIfStatement(firstAscii, 2, -60);
-			zeroAndOneIfStatement(firstAscii, 3, -90);
+			zeroAndOneIfStatement(firstAscii, 1, width);
+			zeroAndOneIfStatement(firstAscii, 2, width*2);
+			zeroAndOneIfStatement(firstAscii, 3, width*3);
 			zeroAndOneIfStatement(firstAscii, 4, -120);
 			zeroAndOneIfStatement(firstAscii, 5, -150);
 			zeroAndOneIfStatement(firstAscii, 6, -180);
