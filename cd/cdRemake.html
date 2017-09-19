@@ -7,10 +7,11 @@
 	<script src="../extras/jquery.min.js"></script>
 </head>
 <body>
+	<h1 style="text-align:center">Laser Version 2.0.1</h1>
 <canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;"> Your browser does not support the HTML5 canvas tag.</canvas>
 	<button id="pauseButton">pause</button>
 	<br>
-	1st <input type="text" name="first" id="first" maxlength="1">
+	1st <input type="text" name="first" id="first" maxlength="1" onKeyDown="return lettersOnly(event)">
 	<br>
 	2nd
 	<input type="text" name="second" id="second" maxlength="1">
@@ -20,10 +21,13 @@
 	<br>
 	<button id="getLetters">letters</button>
 	<script>
-		var first = 0;
-		var firstAscii = 0;
+		function lettersOnly(event) {
+		    var key = event.keyCode;
+		    return ((key >= 65 && key <= 90) || key == 8 || key == 9);
+		};
 		var lettersClickedButton = $("#getLetters");
-		
+		var pauseButton = $("#pauseButton");
+		pauseButton.hide()
 		lettersClickedButton.click(function() {
 			console.log("clicked")
 			first = $("#first").val();
@@ -36,17 +40,20 @@
 			console.log(secondAscii);
 			console.log(thirdAscii);
 			run();
+			pauseButton.show()
 		});
 										  
 		var pauseButtonClicked = 0;
 		var pauseButtonClickedOnce = 0;
 		$('#pauseButton').click(function() {
 			if (pauseButtonClickedOnce == 0){
-						pauseButtonClicked = 1; 
-						pauseButtonC;oafflickedOnce = 1;
-						console.log(pauseButtonClicked)
+				pauseButtonClicked = 1; 
+				pauseButtonClickedOnce = 1;
+				console.log(pauseButtonClicked)
+				pauseButton.html('resume');
 			}
 			else{
+				pauseButton.html('pause');
 				pauseButtonClicked = 0;
 				pauseButtonClickedOnce = 0
 				console.log(pauseButtonClicked)
