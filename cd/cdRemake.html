@@ -65,8 +65,7 @@
 		var ctx = c.getContext("2d");
 		var rect = c.getContext("2d");
 		//sets up the for loop
-		var i = 0
-		var howManyTimes = 840;
+		
 		function laser() {
 			rect.fillStyle="#ff0000";
 			rect.fillRect(151,0,-5,149);
@@ -83,15 +82,7 @@
 			ctx.fillStyle="#a9a9a9";
 			ctx.fillRect(0,0,500,20);
 		}
-		
-		
-		
-		function run(){
-			function forLoop(){
-				topPart()
-				//used to shorten the code by alot
-				//so you don't have to repeatly type draw rectangles and where and check if 1 or 0
-				function zeroAndOneIfStatement(array, number, where){
+		function zeroAndOneIfStatement(array, number, where){
 					//console.log(array, number, where);
 					if(array[number] == 1){
 						ctx.fillStyle="#210123";
@@ -110,6 +101,14 @@
 					}*/
 					
 				}
+		
+		var i = 0
+		var howManyTimes = 840;
+		function run(){
+			function forLoop(){
+				topPart()
+				//used to shorten the code by alot
+				//so you don't have to repeatly type draw rectangles and where and check if 1 or 0
 				var width = -30
 				laser()
 				zeroAndOneIfStatement(firstAscii, 0, width*0);
