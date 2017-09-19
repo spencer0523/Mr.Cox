@@ -98,14 +98,12 @@
 			ctx.fillRect(i + where,0,25,50);
 			ctx.clearRect(i + (where-1),0,0.5,50);
 			topPart()
-			oneLaser()
 		}
 		function zeroBox(where){
 			ctx.strokeStyle="#cfcfd1";
 			ctx.strokeRect(i + where,0,25,50);
 			ctx.clearRect(i + (where-1),0,0.5,50);
 			topPart()
-			zeroLaser()
 		}
 		
 		
@@ -120,9 +118,9 @@
 			}
 			if(firstAscii[0] == 0 && (i < 150 && i > 0)){
 				zeroLaser();
-				zeroBox();
+				zeroBox(-150);
 			} else if (firstAscii[0] == 1 && (i < 150 && i > 0)){
-				oneBox();
+				oneBox(-150);
 				oneLaser();
 			}
 			if(i == 180){
@@ -131,13 +129,13 @@
 			}
 			if(firstAscii[1] == 0 && (i < 180 && i > 150)){
 				zeroLaser();
-				zeroAndOneIfStatement(firstAscii, 1, -30);
+				zeroBox();
 			} else if (firstAscii[1] == 1 && (i < 180 && i > 150)){
 				oneLaser();
+				oneBox(-181)
 			}
 			if(firstAscii[2] == 0 && (i < 210 && i > 180)){
 				zeroLaser();
-				zeroAndOneIfStatement(firstAscii, 2, -60);
 			} else if (firstAscii[2] == 1 && (i < 210 && i > 180)){
 				oneLaser();
 			}
@@ -145,7 +143,6 @@
 				clearLaser();
 			}
 			if(firstAscii[3] == 0 && (i < 240 && i > 210)){
-				zeroAndOneIfStatement(firstAscii, 3, -90);
 				zeroLaser();
 			
 			} else if (firstAscii[3] == 1 && (i < 240 && i > 210)){
@@ -156,7 +153,6 @@
 			}
 			if(firstAscii[4] == 0 && (i < 270 && i > 240)){
 				zeroLaser();
-				zeroAndOneIfStatement(firstAscii, 4, -120);
 			} else if (firstAscii[4] == 1 && (i < 270 && i > 240)){
 				oneLaser();
 			}
@@ -165,7 +161,6 @@
 			}
 			if(firstAscii[5] == 0 && (i < 300 && i > 270)){
 				zeroLaser();
-				zeroAndOneIfStatement(firstAscii, 5, -150);
 			} else if (firstAscii[5] == 1 && (i < 300 && i > 270)){
 				oneLaser();
 			}
@@ -173,23 +168,23 @@
 				clearLaser();
 			}
 			if(firstAscii[6] == 0 && (i < 330 && i > 300)){
-				zeroBox(331);
+				zeroBox(-331);
 				zeroLaser();
 				
 			} else if (firstAscii[6] == 1 && (i < 330 && i > 300)){
 				oneLaser();
-				oneBox(331);
+				oneBox(-331);
 			}
 			
 			if(i == 330){
 				clearLaser();
 			}
 			if(firstAscii[7] == 0 && (i < 360 && i > 330)){
-				zeroLaser(361);
+				zeroLaser(-361);
 				zeroBox()
 				
 			} else if (firstAscii[7] == 1 && (i < 360 && i > 330)){
-				oneLaser(361);
+				oneLaser(-361);
 				oneBox()
 			}
 			if(i == 360){
