@@ -10,13 +10,13 @@
 <canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;"> Your browser does not support the HTML5 canvas tag.</canvas>
 	<button id="pauseButton">pause</button>
 	<br>
-	1st <input type="text" name="first" id="first">
+	1st <input type="text" name="first" id="first" maxlength="1">
 	<br>
 	2nd
-	<input type="text" name="second" id="second">
+	<input type="text" name="second" id="second" maxlength="1">
 	<br>
 	3rd
-	<input type="text" name="third" id="third">
+	<input type="text" name="third" id="third" maxlength="1">
 	<br>
 	<button id="getLetters">letters</button>
 	<script>
@@ -59,28 +59,12 @@
 		var rect = c.getContext("2d");
 		//sets up the for loop
 		var i = 0
-		var howManyTimes = 835;
+		var howManyTimes = 840;
 		function laser() {
-		rect.fillStyle="#ff0000";
-		rect.fillRect(151,0,-5,149);
-		rect.stroke();
-		rect.closePath;
-		}
-	
-		function zeroLaser(){
 			rect.fillStyle="#ff0000";
-			rect.fillRect(150,20,-5,200);
+			rect.fillRect(151,0,-5,149);
 			rect.stroke();
-		}
-		//what the one laser should look like
-		function oneLaser(){
-			rect.fillStyle="#ff0000";
-			rect.fillRect(150,50,-5,230);
-			rect.stroke();
-		}
-		//clears the entire laser(and also everything behind it)
-		function clearLaser() {
-			rect.clearRect(150,0,-5,150);
+			rect.closePath;
 		}
 		//clears the rectangle so it moves forward
 		function clearRectagle(){
@@ -93,156 +77,65 @@
 			ctx.fillRect(0,0,500,20);
 		}
 		
-		function oneBox(where){
-			ctx.fillStyle="#210123";
-			ctx.fillRect(i + where,0,25,50);
-			ctx.clearRect(i + (where-1),0,0.5,50);
-			topPart()
-		}
-		function zeroBox(where){
-			ctx.strokeStyle="#cfcfd1";
-			ctx.strokeRect(i + where,0,25,50);
-			ctx.clearRect(i + (where-1),0,0.5,50);
-			topPart()
-		}
 		
 		
 		function run(){
 			function forLoop(){
-			topPart()
-			//used to shorten the code by alot
-			//so you don't have to repeatly type draw rectangles and where and check if 1 or 0
-			if(i == 150){
-				clearLaser()
-				console.log("This one is fine");
-			}
-			if(firstAscii[0] == 0 && (i < 150 && i > 0)){
-				zeroLaser();
-				zeroBox(-150);
-			} else if (firstAscii[0] == 1 && (i < 150 && i > 0)){
-				oneBox(-150);
-				oneLaser();
-			}
-			if(i == 180){
-				clearLaser()
-				console.log("this one is fine");
-			}
-			if(firstAscii[1] == 0 && (i < 180 && i > 150)){
-				zeroLaser();
-				zeroBox();
-			} else if (firstAscii[1] == 1 && (i < 180 && i > 150)){
-				oneLaser();
-				oneBox(-181)
-			}
-			if(firstAscii[2] == 0 && (i < 210 && i > 180)){
-				zeroLaser();
-			} else if (firstAscii[2] == 1 && (i < 210 && i > 180)){
-				oneLaser();
-			}
-			if(i == 210){
-				clearLaser();
-			}
-			if(firstAscii[3] == 0 && (i < 240 && i > 210)){
-				zeroLaser();
-			
-			} else if (firstAscii[3] == 1 && (i < 240 && i > 210)){
-				oneLaser();
-			}
-			if(i == 240){
-				clearLaser();
-			}
-			if(firstAscii[4] == 0 && (i < 270 && i > 240)){
-				zeroLaser();
-			} else if (firstAscii[4] == 1 && (i < 270 && i > 240)){
-				oneLaser();
-			}
-			if(i == 270){
-				clearLaser();
-			}
-			if(firstAscii[5] == 0 && (i < 300 && i > 270)){
-				zeroLaser();
-			} else if (firstAscii[5] == 1 && (i < 300 && i > 270)){
-				oneLaser();
-			}
-			if(i == 300){
-				clearLaser();
-			}
-			if(firstAscii[6] == 0 && (i < 330 && i > 300)){
-				zeroBox(-331);
-				zeroLaser();
-				
-			} else if (firstAscii[6] == 1 && (i < 330 && i > 300)){
-				oneLaser();
-				oneBox(-331);
-			}
-			
-			if(i == 330){
-				clearLaser();
-			}
-			if(firstAscii[7] == 0 && (i < 360 && i > 330)){
-				zeroLaser(-361);
-				zeroBox()
-				
-			} else if (firstAscii[7] == 1 && (i < 360 && i > 330)){
-				oneLaser(-361);
-				oneBox()
-			}
-			if(i == 360){
-				clearLaser();
-			}
-			if(i == 390){
-				clearLaser();
-			}
-			if(i == 420){
-				clearLaser();
-			}
-			if(i == 450){
-				clearLaser();
-			}
-			if(i == 480){
-				clearLaser();
-			}
-			if(i == 510){
-				clearLaser();
-			}
-			if(i == 540){
-				clearLaser();
-			}
-			if(i == 570){
-				clearLaser();
-			}
-			if(i == 600){
-				clearLaser();
-			}
-			if(i == 630){
-				clearLaser();
-			}
-			if(i == 660){
-				clearLaser();
-			}
-			if(i == 690){
-				clearLaser();
-			}
-			if(i == 720){
-				clearLaser();
-			}
-			if(i == 750){
-				clearLaser();
-			}
-			if(i == 780){
-				clearLaser();
-			}
-		
-			if(i == 810){
-				clearLaser();
-			}
-			i++
-			if(pauseButtonClickedOnce != 1){
-				if(i < howManyTimes){
-					//uses a timeout function that way you can see everything moving 
-					setTimeout(forLoop, 25);
+				topPart()
+				//used to shorten the code by alot
+				//so you don't have to repeatly type draw rectangles and where and check if 1 or 0
+				function zeroAndOneIfStatement(array, number, where){
+					//console.log(array, number, where);
+					if(array[number] == 1){
+						ctx.fillStyle="#210123";
+						ctx.fillRect(i + where,0,25,50);
+						ctx.clearRect(i + (where-1),0,0.5,50);
+						topPart()
+					} else if(array[number] != 1){
+						ctx.strokeStyle="#cfcfd1";
+						ctx.strokeRect(i + where,0,25,50);
+						ctx.clearRect(i + (where-1),0,0.5,50);
+						topPart()
+						//laser()
+					}
+			/*		if(array == secondAscii){
+						number 
+					}*/
+					
 				}
-			}
+				var width = -30
+				laser()
+				zeroAndOneIfStatement(firstAscii, 0, width*0);
+				zeroAndOneIfStatement(firstAscii, 1, width*1);
+				zeroAndOneIfStatement(firstAscii, 2, width*2);
+				zeroAndOneIfStatement(firstAscii, 3, width*3);
+				zeroAndOneIfStatement(firstAscii, 4, width*4);
+				zeroAndOneIfStatement(firstAscii, 5, width*5);
+				zeroAndOneIfStatement(firstAscii, 6, width*6);
+				zeroAndOneIfStatement(firstAscii, 7, width*7);
+				zeroAndOneIfStatement(secondAscii, 0, width*8);
+				zeroAndOneIfStatement(secondAscii, 1, width*9);
+				zeroAndOneIfStatement(secondAscii, 2, width*10);
+				zeroAndOneIfStatement(secondAscii, 3, width*11);
+				zeroAndOneIfStatement(secondAscii, 4, width*12);
+				zeroAndOneIfStatement(secondAscii, 5, width*13);
+				zeroAndOneIfStatement(secondAscii, 6, width*14);
+				zeroAndOneIfStatement(secondAscii, 7, width*15);
+				zeroAndOneIfStatement(thirdAscii, 0, width*16);
+				zeroAndOneIfStatement(thirdAscii, 1, width*17);
+				zeroAndOneIfStatement(thirdAscii, 2, width*18);
+				zeroAndOneIfStatement(thirdAscii, 3, width*19);
+				zeroAndOneIfStatement(thirdAscii, 4, width*20);
+				zeroAndOneIfStatement(thirdAscii, 5, width*21);
+				zeroAndOneIfStatement(thirdAscii, 6, width*22);
+				zeroAndOneIfStatement(thirdAscii, 7, width*23);
+				i++
+				if(pauseButtonClickedOnce != 1){
+					if(i < howManyTimes){
+						//uses a timeout function that way you can see everything moving 
+						setTimeout(forLoop, 25);
+					}
+				}
 				
 			}
 			forLoop()
