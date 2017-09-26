@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	<html>
+
+<head>
+<title></title>
+<style>#laser {border: solid 1px black;}</style>
+</head>
+<body>
+<canvas id="laser" width=300; height=200;></canvas>
+<script>
+var CDcode=[0,1,0,1,0,1,0,0,0,1,1,1,0,1,0,0]
+var laserX=150;
+var laserY=60;
+var laserWidth=4;
+var laserLength=160;
+var angler=20;
+function laserOut(color) {
+ctx.beginPath();
+ctx.moveTo(laserX,laserY);
+ctx.lineTo(laserX-laserWidth,laserY);
+ctx.lineTo(laserX-laserWidth-angler,laserY+laserLength);
+ctx.lineTo(laserX-angler,laserY+laserLength);
+ctx.lineTo(laserX,laserY);
+ctx.strokeStyle=color;
+ctx.fillStyle=color;
+ctx.stroke();
+ctx.fill();}
+function laserIn() {
+ctx.beginPath();
+ctx.moveTo(laserX,laserY);
+ctx.lineTo(laserX+laserWidth,laserY);
+ctx.lineTo(laserX+laserWidth+angler,laserY+laserLength);
+ctx.lineTo(laserX+angler,laserY+laserLength);
+ctx.lineTo(laserX,laserY);
+ctx.strokeStyle="#FF0000";
+ctx.fillStyle="#FF0000";
+ctx.stroke();
+ctx.fill();
+}
+var laser_canvas = document.getElementById("laser");
+var ctx = laser_canvas.getContext("2d");
+laserIn();
+
+for (n=0;n<CDcode.length; n++) {
+if (CDcode[n]==1) {
+setTimeout("laserOut('#FF0000')", 250);
+}
+else {
+//ctx.strokeStyle="#FFFFFF";
+//ctx.fillStyle="#FFFFFF";
+setTimeout("laserOut('#FFFFFF')", 250);
+}
+}
+</script>
+</body>
+</html>
