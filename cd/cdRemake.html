@@ -39,7 +39,10 @@
 			thirdAscii = getAsciiLetters(third);
 			console.log(secondAscii);
 			console.log(thirdAscii);
+			wholeArray = firstAscii.concat(secondAscii, thirdAscii)
+			console.log(wholeArray)
 			run();
+			runTwo();
 			pauseButton.show()
 		});
 										  
@@ -66,12 +69,19 @@
 		var rect = c.getContext("2d");
 		//sets up the for loop
 		
-		function laser() {
-			rect.fillStyle="#ff0000";
-			rect.fillRect(151,0,-5,149);
-			rect.stroke();
-			rect.closePath;
-		}
+		
+		function laserOut(color) {
+				ctx.beginPath();
+				ctx.moveTo(laserX,laserY);
+				ctx.lineTo(laserX-laserWidth,laserY);
+				ctx.lineTo(laserX-laserWidth-angler,laserY+laserLength);
+				ctx.lineTo(laserX-angler,laserY+laserLength);
+				ctx.lineTo(laserX,laserY);
+				ctx.strokeStyle=color;
+				ctx.fillStyle=color;
+				ctx.stroke();
+				ctx.fill();
+			}
 		//clears the rectangle so it moves forward
 		function clearRectagle(){
 			rect.clearRect(0,0,i+40,150);
@@ -81,6 +91,17 @@
 		function topPart(){
 			ctx.fillStyle="#a9a9a9";
 			ctx.fillRect(0,0,500,20);
+		}
+		var laserX=150;
+		var laserY=50;
+		var laserWidth = 4;		
+		var laserLength=160;		
+		var angler=40;
+		function laser() {
+			rect.fillStyle="#ff0000";
+			rect.fillRect(150,0,-5,150);
+			rect.stroke();
+			rect.closePath;
 		}
 		function zeroAndOneIfStatement(array, number, where){
 					//console.log(array, number, where);
@@ -92,6 +113,7 @@
 					} else if(array[number] != 1){
 						ctx.strokeStyle="#cfcfd1";
 						ctx.strokeRect(i + where,0,25,50);
+						ctx.stroke();
 						ctx.clearRect(i + (where-1),0,0.5,50);
 						topPart()
 						//laser()
@@ -105,8 +127,34 @@
 		var i = 0
 		var howManyTimes = 840;
 		function run(){
+			setTimeout(function(){
+				for (var i=0;i<wholeArray.length; i++) {
+					(function(i) {
+						setTimeout(function() { 
+							if(wholeArray[i]==1){
+								laserOut('#FF0000')
+								laser();
+								topPart()
+							}
+							else {
+								laser();
+								laserOut('#FFFFFF')
+								laser()
+								topPart();
+							}
+							console.log(i); 
+					  }, 865 * i);
+					})(i);
+				}
+			}, 3500);
+		}
+		
+		
+		
+		function runTwo(){
 			function forLoop(){
 				topPart()
+				
 				//used to shorten the code by alot
 				//so you don't have to repeatly type draw rectangles and where and check if 1 or 0
 				var width = -30
@@ -130,12 +178,12 @@
 				zeroAndOneIfStatement(thirdAscii, 0, width*16);
 				zeroAndOneIfStatement(thirdAscii, 1, width*17);
 				zeroAndOneIfStatement(thirdAscii, 2, width*18);
-				zeroAndOneIfStatement(thirdAscii, 3, width*19);
-				zeroAndOneIfStatement(thirdAscii, 4, width*20);
+				zeroAndOneIfStatement(thirdAscii, 3, width*19);		zeroAndOneIfStatement(thirdAscii, 4, width*20);
 				zeroAndOneIfStatement(thirdAscii, 5, width*21);
 				zeroAndOneIfStatement(thirdAscii, 6, width*22);
 				zeroAndOneIfStatement(thirdAscii, 7, width*23);
 				i++
+				
 				if(pauseButtonClickedOnce != 1){
 					if(i < howManyTimes){
 						//uses a timeout function that way you can see everything moving 
@@ -146,7 +194,6 @@
 			}
 			forLoop()
 		}
-			
 	</script>
 </body>
 </html>
