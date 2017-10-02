@@ -24,7 +24,9 @@
 	<br>
 	<button id="getLetters">letters</button>
 	<script>
+		//function to check values inputted into the textfields
 		function lettersOnly(event) {
+			//makes sure that you only type letters in
 		    var key = event.keyCode;
 		    return ((key >= 65 && key <= 90) || key == 8 || key == 9);
 		};
@@ -32,26 +34,27 @@
 		var pauseButton = $("#pauseButton");
 		pauseButton.hide()
 		lettersClickedButton.click(function() {
-			console.log("clicked")
+			//gets the value of each of the text boxes and then converts it into a Ascii value array.
 			first = $("#first").val();
 			firstAscii = getAsciiLetters(first);
-			console.log(firstAscii);
 			second = $("#second").val();
 			secondAscii = getAsciiLetters(second);
 			third = $("#third").val();
 			thirdAscii = getAsciiLetters(third);
-			console.log(secondAscii);
-			console.log(thirdAscii);
+			//combines the three arrays into one so that the reflection laser can use them
 			wholeArray = firstAscii.concat(secondAscii, thirdAscii)
-			console.log(wholeArray)
+			//runs the function 
 			run();
 			runTwo();
+			//shows the pause button only once the function has started to run
 			pauseButton.show()
 		});
 										  
 		var pauseButtonClicked = 0;
 		var pauseButtonClickedOnce = 0;
+		//pauses or resumes the program 
 		$('#pauseButton').click(function() {
+			//if and else statements used to tell if the button was already pressed before in order to resume or pause
 			if (pauseButtonClickedOnce == 0){
 				pauseButtonClicked = 1; 
 				pauseButtonClickedOnce = 1;
@@ -70,9 +73,13 @@
 		var c = document.getElementById("myCanvas");
 		var ctx = c.getContext("2d");
 		var rect = c.getContext("2d");
-		//sets up the for loop
 		
-		
+		//creates the reflection laser that is either red or grey.(can't get it to completely disappear)
+		var laserX=150;
+		var laserY=50;
+		var laserWidth = 4;		
+		var laserLength=160;		
+		var angler=40;
 		function laserOut(color) {
 				ctx.beginPath();
 				ctx.strokeStyle=color;
@@ -85,75 +92,70 @@
 				ctx.stroke();
 				ctx.fill();
 			}
-		//clears the rectangle so it moves forward
+		//clears the rectangle so it erases the trail that the shape would have left behind. This makes it so the shapes appear to be moving forward
 		function clearRectagle(){
 			rect.clearRect(0,0,i+40,150);
 		}
 
-		//the grey area at the top of the screen
+		//the grey area at the top of the screen that would be considered the "base" of the disk. Has to be redrawn if laser is redrawn so that the laser doesn't overlap it.
 		function topPart(){
 			ctx.fillStyle="#a9a9a9";
 			ctx.fillRect(0,0,500,20);
 		}
-		var laserX=150;
-		var laserY=50;
-		var laserWidth = 4;		
-		var laserLength=160;		
-		var angler=40;
+		
 		function laser() {
+			//red bar that doesn't move at all
 			rect.fillStyle="#ff0000";
 			rect.fillRect(150,0,-5,150);
 			rect.stroke();
 			rect.closePath;
 		}
 		function zeroAndOneIfStatement(array, number, where){
-					//console.log(array, number, where);
 					if(array[number] == 1){
 						ctx.fillStyle="#210123";
 						ctx.fillRect(i + where,0,25,50);
 						ctx.clearRect(i + (where-1),0,0.5,50);
 						topPart()
-					} else if(array[number] != 1){
+					} /*runs if it is a zero*/
+					else if(array[number] != 1){
 						ctx.strokeStyle="#cfcfd1";
 						ctx.strokeRect(i + where,0,25,50);
 						ctx.stroke();
 						ctx.clearRect(i + (where-1),0,0.5,50);
 						topPart()
-						//laser()
 					}
-			/*		if(array == secondAscii){
-						number 
-					}*/
-					
 				}
 		
 		var i = 0
 		var howManyTimes = 840;
+		//the reflection laser and the bars moving across have to be run at different times because of issues with the for loop.
 		function run(){
 			setTimeout(function(){
-				for (var i=0;i<wholeArray.length; i++) {
+				for (var i=0, length = wholeArray.length; i < length; i++) {
 					(function(i) {
 						setTimeout(function() { 
 							if(wholeArray[i]==1){
+								//red
 								laserOut('#FF0000')
 								laser();
 								topPart()
 							}
 							else {
+								//white but turns out to have a grey outline
 								laser();
 								laserOut('#FFFFFF')
 								laser()
 								topPart();
 							}
 							console.log(i); 
-					  }, 855 * i);
+					  }, 860/*amount of time til it moves on to the next value*/ * i);
 					})(i);
 				}
-			}, 3390);
+			}, 3390/*when the function should first start. If it starts right away then it isn't in sync with the bars at the top. If it starts too late then it throws off everything because it wouldn't show the right value at that time.*/);
 		}
 		
 		
-		
+		//the function that creates the blocks at the top and is the "main" function of the program
 		function runTwo(){
 			function forLoop(){
 				topPart()
@@ -186,10 +188,10 @@
 				zeroAndOneIfStatement(thirdAscii, 6, width*22);
 				zeroAndOneIfStatement(thirdAscii, 7, width*23);
 				i++
-				
+				//runs only if the pause button isn't clicked
 				if(pauseButtonClickedOnce != 1){
 					if(i < howManyTimes){
-						//uses a timeout function that way you can see everything moving 
+						//uses a timeout function that way you can see everything moving and is used as a "for loop" that is timed to run at specific intervals 
 						setTimeout(forLoop, 25);
 					}
 				}
