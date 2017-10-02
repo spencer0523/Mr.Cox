@@ -1,7 +1,9 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#66ff99">
 <title>cdRemake</title>
 	<script src="asciiLetters.js"></script>
 	<script src="../extras/jquery.min.js"></script>
@@ -11,12 +13,13 @@
 <canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;"> Your browser does not support the HTML5 canvas tag.</canvas>
 	<button id="pauseButton">pause</button>
 	<br>
-	1st <input type="text" name="first" id="first" maxlength="1" onKeyDown="return lettersOnly(event)">
+	<label for="first">1st</label>
+	<input type="text" name="first" id="first" maxlength="1" onKeyDown="return lettersOnly(event)">
 	<br>
-	2nd
+	<label for="second">2nd</label>
 	<input type="text" name="second" id="second" maxlength="1" onKeyDown="return lettersOnly(event)">
 	<br>
-	3rd
+	<label for="third">3rd</label>
 	<input type="text" name="third" id="third" maxlength="1" onKeyDown="return lettersOnly(event)">
 	<br>
 	<button id="getLetters">letters</button>
@@ -72,13 +75,13 @@
 		
 		function laserOut(color) {
 				ctx.beginPath();
+				ctx.strokeStyle=color;
+				ctx.fillStyle=color;
 				ctx.moveTo(laserX,laserY);
 				ctx.lineTo(laserX-laserWidth,laserY);
 				ctx.lineTo(laserX-laserWidth-angler,laserY+laserLength);
 				ctx.lineTo(laserX-angler,laserY+laserLength);
 				ctx.lineTo(laserX,laserY);
-				ctx.strokeStyle=color;
-				ctx.fillStyle=color;
 				ctx.stroke();
 				ctx.fill();
 			}
@@ -143,10 +146,10 @@
 								topPart();
 							}
 							console.log(i); 
-					  }, 865 * i);
+					  }, 855 * i);
 					})(i);
 				}
-			}, 3500);
+			}, 3390);
 		}
 		
 		
