@@ -1,0 +1,226 @@
+<script src="extras/jquery.min.js"></script>
+<script src="cd/asciiLetters.js"></script>
+<style>
+    canvas {
+        background-color: #555555;
+        border: solid #CCCCCC 15px;
+        border-left-width: 5px;
+        border-right-width: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0px 0px 6px 0px #000;
+        box-shadow: 0px 0px 6px 0px #000;
+    }
+
+    #pendulum {
+        border-left-width: 15px;
+    }
+
+    #signalCanvas {
+        margin: 0 0 0 10px;
+        border-right-width: 15px;
+        border-width: 15px;
+    }
+
+    #narrative {
+        position: relative;
+        padding: 10px;
+        left: 10px;
+        font-size: 14pt;
+        width: 550px;
+        z-index: -1;
+    }
+
+    button {
+        color: #F88;
+        background-color: #55f;
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+        -moz-background-clip: padding;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        font-weight: bold;
+        float: left;
+        clear: both;
+    }
+
+    button:hover,
+    button:active,
+    button:focus {
+        background-color: #33d;
+    }
+
+    p {
+        position: relative;
+        top: 15px;
+        display: inline;
+        font-size: 120%;
+    }
+
+    #controlButtons {
+        float: left;
+        width: 140px;
+    }
+
+    #sourceSpace {
+        float: left;
+        width: 550px;
+    }
+
+    .controlBox {
+        float: left;
+        margin: 0px 0px 2px 42px;
+        height: 56px;
+        width: 138px;
+        background-color: #CCCCCC;
+        color: black;
+        text-align: center;
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+        -moz-background-clip: padding;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        -webkit-box-shadow: 0px 0px 6px 0px #000;
+        box-shadow: 0px 0px 6px 0px #000;
+    }
+
+    #freezeButton {
+        float: left;
+        margin: 10px 10px 10px 40px;
+    }
+</style>
+<h1 style="text-align: center">Slow-Motion Laser</h1>
+<div id="scopeSpace">
+    <canvas id="signalCanvas" width="500" height="200"></canvas>
+    <br />
+     <<div id="narrative">Imagine drawing with chalk on a grocery store conveyer belt...</div>
+</div>
+<div id="sourceSpace">
+	<div id="textBoxes">
+			<br>
+		<label for="first">1st</label>
+		<input type="text" name="first" id="first" maxlength="1" onKeyDown="return lettersOnly(event)">
+		<br>
+		<label for="second">2nd</label>
+		<input type="text" name="second" id="second" maxlength="1" onKeyDown="return lettersOnly(event)">
+		<br>
+		<label for="third">3rd</label>
+		<input type="text" name="third" id="third" maxlength="1" onKeyDown="return lettersOnly(event)">
+		<br>
+		<button id="getLetters">letters</button>
+	</div>
+    <div id="freezeButton">
+        <button id="freeze" onclick="freezeWave()">Freeze the Wave</button>
+    </div>
+</div>
+<div id="testSpace"></div>
+<script>
+	function lettersOnly(event) {
+			//makes sure that you only type letters in
+		    var key = event.keyCode;
+		    return ((key >= 65 && key <= 90) || key == 8 || key == 9);
+		};
+	var lettersClickedButton = $("#getLetters");
+	var pauseButton = $("#pauseButton");
+	var CDcode = [];
+	lettersClickedButton.click(function() {
+			//gets the value of each of the text boxes and then converts it into a Ascii value array.
+			first = $("#first").val();
+			firstAscii = getAsciiLetters(first);
+			second = $("#second").val();
+			secondAscii = getAsciiLetters(second);
+			third = $("#third").val();
+			thirdAscii = getAsciiLetters(third);
+			//combines the three arrays into one so that the reflection laser can use them
+			CDcode = firstAscii.concat(secondAscii, thirdAscii)
+			//creates a array of 
+			//runs the function 
+			//shows the pause button only once the function has started to run
+			pauseButton.show()
+			freeze=false
+		});
+    var freeze = true;
+    var waveForm = [80];
+    var amplitude = 80;
+    var newFrequency = .08;
+    
+    var m = 0;
+
+    function drawSource() {
+        if (!freeze) {
+			var wave_canvas = document.getElementById("signalCanvas");
+            var ctx = wave_canvas.getContext("2d");
+            if (CDcode[m] == 1) {
+                amplitude = 150;
+            }
+            if (CDcode[m] == 0) {
+                amplitude = 50;
+            }
+            for (p = 0; p < 50; p++) {
+                waveForm.unshift(amplitude);
+            }
+			//if it goes off the screen remove that value
+            if (waveForm.length > 500) {
+                waveForm.pop();
+            }
+			if(m != 25){
+				ctx.font = "30px Arial";
+				ctx.fillText(CDcode[m],10,30);
+			}
+			
+            ctx.clearRect(0, 0, 500, 200)
+            ctx.strokeStyle = "#999999";
+            ctx.fillStyle = "#ffff00";
+			
+            for (n = 0; n < 500; n++) {
+                ctx.strokeStyle = "#ffff00";
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(n - 1, waveForm[n - 1]);
+                ctx.lineTo(n, waveForm[n]);
+                ctx.stroke();
+                ctx.strokeStyle = "#0000ff";
+                ctx.beginPath();
+                ctx.moveTo(0, 100);
+                ctx.lineTo(500, 100);
+                ctx.stroke();
+                ctx.strokeStyle = "#999999";
+                ctx.lineWidth = 1;
+            }
+            m++;
+			if(m==24){
+				freeze = true
+			}
+			console.log(m);
+			console.log("still running");
+        }
+    }
+
+    function RunIt() {
+        window.setInterval(drawSource, 500);
+    }
+
+    function freezeWave() {
+        if (!freeze) {
+            freeze = true;
+            var wave_canvas = document.getElementById("signalCanvas");
+            var ctx = wave_canvas.getContext("2d");
+            ctx.strokeStyle = "#aaaaaa";
+            for (n = 1; n < 25; n++) {
+                ctx.moveTo(20 * n, 0);
+                ctx.lineTo(20 * n, 200);
+                ctx.stroke();
+            }
+            for (m = 1; m < 10; m++) {
+                ctx.moveTo(0, 20 * m);
+                ctx.lineTo(500, 20 * m);
+                ctx.stroke();
+            }
+            document.getElementById("freeze").innerHTML = "Restart Wave";
+        } else {
+            freeze = false;
+            document.getElementById("freeze").innerHTML = "Freeze the Wave";
+        }
+    }
+
+    RunIt();
+</script>
