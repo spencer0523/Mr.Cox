@@ -1,0 +1,336 @@
+<!doctype html>
+<html>
+
+	<head>
+		<title></title> 
+		<style>
+			#tensUp {position: absolute; top: 13px; background-color: green}
+			#onesUp {position: absolute; top: 13px; background-color: green}
+			#tenSecondUp {position: absolute; top: 13px; background-color: green}
+			#oneSecondUp {position: absolute; top: 13px; background-color: green}
+			#clockCanvas {xwidth: 100%; height: 100%;}
+		</style>
+	</head>
+	<body>
+		<canvas id="clockCanvas" height=200 width=200></canvas>
+		<canvas id="tensUp" height=50 width=50></canvas>
+		<canvas id="onesUp" height=50 width=50></canvas>
+		<canvas id="tenSecondUp" height=50 width=50></canvas>
+		<canvas id="oneSecondUp"height=50 width=50></canvas>
+		<button onclick="myVar = setInterval(startClock, 1000);">start</button>
+		<script>
+			window.addEventListener("resize", setUpVariables);
+			var intervalId;
+			canvas = document.getElementById("clockCanvas")
+			ctx = canvas.getContext("2d")
+			tensUpArrow = document.getElementById("tensUp")
+
+			onesUpArrow = document.getElementById("onesUp")
+			tenSecondUp = document.getElementById("tenSecondUp")
+			oneSecondUp = document.getElementById("oneSecondUp")
+			number = 0
+			canvas.width = window.innerWidth;
+	        canvas.height = window.innerHeight;
+
+			var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			var sec_ones=0;
+			var sec_tens=0;
+			var min_ones=0;
+			var min_tens=0;
+			var tensOfMinutes = w*1/16;
+			var onesOfMinutes = w*5/16;
+			var tensOfSeconds = w*9/16;
+			var onesOfSeconds = w*13/16;
+			var rightLine = w*3/16;
+			var leftLine = 0;
+			var topLine = h/8;
+			var lineThickness = w/32;
+			var leftLine = 0;
+			var rightLine = w*2/16;
+			var topLine = h/8;
+			var middleLine = h/2;
+			var bottomLine = h*7/8;
+			function setUpVariables(){
+				ctx.clearRect(0,0,canvas.width,canvas.height)
+				w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+				h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				canvas.height = h
+				canvas.width = w
+				sec_ones=0;
+				sec_tens=0;
+				min_ones=0;
+				min_tens=0;
+				tensOfMinutes = w*1/16;
+				onesOfMinutes = w*5/16;
+				tensOfSeconds = w*9/16;
+				onesOfSeconds = w*13/16;
+				rightLine = w*3/16;
+				leftLine = 0;
+				topLine = h/8;
+				lineThickness = w/32;
+				leftLine = 0;
+				rightLine = w*2/16;
+				topLine = h/8;
+				middleLine = h/2;
+				bottomLine = h*7/8;
+				drawNumber(numbers[0], tensOfMinutes)
+				drawNumber(numbers[0], onesOfMinutes);
+				drawNumber(numbers[0], tensOfSeconds);
+				drawNumber(numbers[0], onesOfSeconds);
+				tensUpArrow.style.right = onesOfSeconds + "px"
+				onesUpArrow.style.right = tensOfSeconds + "px"
+				tenSecondUp.style.right = onesOfMinutes + "px"
+				oneSecondUp.style.right = tensOfMinutes + "px"
+			}
+			
+			var clockSetter
+			tensUpArrow.style.right = onesOfSeconds + "px"
+			onesUpArrow.style.right = tensOfSeconds + "px"
+			tenSecondUp.style.right = onesOfMinutes + "px"
+			oneSecondUp.style.right = tensOfMinutes + "px"
+
+			var numbers = [[
+				   true, //top
+				true, true,//top sides
+				   false, //middle
+				true, true, //bottom sides
+					true //bottom
+			],[
+					false, //top
+				false,	true, //top sides
+					false, //middle
+				false,	true,  //bottom sides
+					false  //bottom
+			],[
+					true,
+				false,	true,
+					true,
+				true,	false,
+					true
+			], [
+					true,
+				false,	true,
+					true,
+				false,	true,
+					true
+			],[
+					false,
+				true,	true,
+					true,
+				false,	true,
+					false,
+			],[
+					true,
+				true,	false,
+					true,
+				false,	true,
+					true
+			],[
+					true,
+				true,	false,
+					true,
+				true,	true,
+					true
+			],[
+					true,
+				false,	true,
+					false,
+				false,	true,
+					false
+			],[
+					true,
+				true,	true,
+					true,
+				true,	true,
+					true
+			],[
+					true,
+				true,	true,
+					true,
+				false,	true,
+					true
+			]
+			]
+			function drawNumber(array,x){
+				
+				if(array[0]){
+					ctx.beginPath()
+					ctx.moveTo(x+leftLine,topLine);
+					//ctx.moveTo(5,5)
+					ctx.lineTo(x+rightLine+(lineThickness),topLine)
+					ctx.stroke()
+										
+				}
+				if(array[1]){
+					ctx.beginPath()
+					/*ctx.moveTo(5,5)
+					ctx.lineTo(5,100)
+					ctx.stroke()*/
+					ctx.moveTo(x+leftLine,topLine)
+					ctx.lineTo(x+leftLine,middleLine)
+					ctx.stroke()
+				}
+				if(array[2]){
+					ctx.beginPath()
+					/*ctx.moveTo(195,10);
+					ctx.lineTo(195,95);
+					ctx.stroke()*/
+					ctx.moveTo(x+rightLine+lineThickness,topLine)
+					ctx.lineTo(x+rightLine+lineThickness,middleLine)
+					ctx.stroke()
+				} 
+				if(array[3]) {
+					ctx.beginPath()
+					/*ctx.moveTo(5,100);
+					ctx.lineTo(195,100);
+					ctx.stroke()*/
+					
+					ctx.moveTo(x+leftLine,middleLine)
+					ctx.lineTo(x+rightLine+lineThickness,middleLine);
+					ctx.stroke();
+				}
+				if(array[4]) {
+					ctx.beginPath()
+					/*ctx.moveTo(5,105);
+					ctx.lineTo(5,195);
+					ctx.stroke()*/
+					
+					ctx.moveTo(x+leftLine,middleLine);
+					ctx.lineTo(x+leftLine,bottomLine);
+					ctx.stroke()
+				}
+				if(array[5]){
+					ctx.beginPath()
+					/*ctx.moveTo(195,105);
+					ctx.lineTo(195,190);
+					ctx.stroke()*/
+					ctx.moveTo(x+rightLine+lineThickness, middleLine);
+					ctx.lineTo(x+rightLine+lineThickness, bottomLine);
+					ctx.stroke()
+				} 
+				if(array[6]) {
+					ctx.beginPath()
+					/*ctx.moveTo(5,195);
+					ctx.lineTo(195,195);
+					ctx.stroke()
+					*/
+					ctx.moveTo(x+leftLine,bottomLine);
+					ctx.lineTo(x+rightLine+lineThickness,bottomLine);
+					ctx.stroke()
+				}
+			}
+			var timerNumber = 500
+
+			tensUpArrow.addEventListener('click', function() { 
+				min_tens += 1
+				if(min_tens == 10){
+					min_tens = 0
+				}
+				ctx.clearRect(0,0,canvas.width,canvas.height)
+				drawNumber(numbers[min_tens], tensOfMinutes)
+				drawNumber(numbers[min_ones], onesOfMinutes);
+				drawNumber(numbers[sec_ones], tensOfSeconds);
+				drawNumber(numbers[sec_tens], onesOfSeconds);
+				
+				
+			}, false);
+			onesUpArrow.addEventListener('click',function(){
+				min_ones += 1
+				if(min_ones == 10){
+					min_ones = 0
+				}
+				console.log(min_ones)
+				
+				ctx.clearRect(0,0,canvas.width,canvas.height)
+				drawNumber(numbers[min_tens], tensOfMinutes)
+				drawNumber(numbers[min_ones], onesOfMinutes);
+				drawNumber(numbers[sec_ones], tensOfSeconds);
+				drawNumber(numbers[sec_tens], onesOfSeconds);
+				
+			},false)
+			oneSecondUp.addEventListener('click',function(){
+				sec_ones += 1
+				if(sec_ones == 10){
+					sec_ones = 0
+				}
+				console.log(min_ones)
+				
+				ctx.clearRect(0,0,canvas.width,canvas.height)
+				drawNumber(numbers[min_tens], tensOfMinutes)
+				drawNumber(numbers[min_ones], onesOfMinutes);
+				drawNumber(numbers[sec_tens], tensOfSeconds);
+				drawNumber(numbers[sec_ones], onesOfSeconds);
+				
+			},false)
+			tenSecondUp.addEventListener('click',function(){
+				sec_tens += 1
+				if(sec_tens == 7){
+					sec_tens = 0
+				}
+				console.log(sec_tens)
+				
+				ctx.clearRect(0,0,canvas.width,canvas.height)
+				drawNumber(numbers[min_tens], tensOfMinutes)
+				drawNumber(numbers[min_ones], onesOfMinutes);
+				drawNumber(numbers[sec_tens], tensOfSeconds);
+				drawNumber(numbers[sec_ones], onesOfSeconds);
+				
+			},false)
+			drawNumber(numbers[0], tensOfMinutes)
+			drawNumber(numbers[0], onesOfMinutes);
+			drawNumber(numbers[0], tensOfSeconds);
+			drawNumber(numbers[0], onesOfSeconds);
+			function setTheClockInterval(){
+
+				//document.write(intervalId)
+			}
+			function startClock(){
+				console.log(`${sec_ones} ${sec_tens} ${min_ones} ${min_tens}`)
+				if(sec_ones==1){
+					if(sec_tens == 0){
+						if(min_ones == 0){
+							if(min_tens == 0){
+								console.log("run")
+							    stopClock()							
+							}
+						}
+					}
+					
+				}
+				sec_ones=sec_ones-1;
+				
+				
+				if(sec_ones<0){
+					sec_ones=9;
+					sec_tens=sec_tens-1;
+					if(sec_tens<0){
+						sec_tens=5;
+						sec_ones=9;
+						min_ones=min_ones-1;
+						if(min_ones<0){
+							min_ones=9;
+							min_tens=min_tens-1;
+							if(min_tens<0){
+								min_tens=5;
+							}
+						}
+					}
+					
+				}
+				ctx.clearRect(0,0,canvas.width,canvas.height)
+				drawNumber(numbers[min_tens], tensOfMinutes)
+				drawNumber(numbers[min_ones], onesOfMinutes);
+				drawNumber(numbers[sec_tens], tensOfSeconds);
+				drawNumber(numbers[sec_ones], onesOfSeconds);
+				//setInterval(startClock, 1000);
+				//clockStarter = setTimeout("startClock()",1000)
+			}
+			function stopClock() {
+				clearInterval(myVar)
+			}
+			//startClock()
+		</script>
+
+	</body>
+</html>
