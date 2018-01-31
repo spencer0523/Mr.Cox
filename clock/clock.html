@@ -79,9 +79,8 @@
 			}
 			setUpVariables()
 			
-			
+			//drawNumber function works by checking whether it should or shouldn't draw a line at that position in the array. This makes it so it is able to draw different numbers based on a 7 element array		
 			function drawNumber(array,x){
-				
 				if(array[0]){
 					ctx.beginPath()
 					ctx.moveTo(x+leftSide,topLine);
